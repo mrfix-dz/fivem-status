@@ -1,0 +1,39 @@
+{
+  "name": "@mrfix.dz/fivem-status",
+  "version": "1.0.0",
+  "description": "fivem-status is a package to monitor the status of a FiveM server, displaying details like online/offline status, player count, and server information.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrfix-dz/fivem-status.git"
+  },
+  "keywords": [
+    "fivem",
+    "status",
+    "fivem-status",
+    "game",
+    "game-status",
+    "server",
+    "monitoring",
+    "online",
+    "offline",
+    "player-count",
+    "server-status",
+    "gtav",
+    "gta",
+    "gta5",
+    "mrfix"
+  ],
+  "author": "mrfix.dz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrfix-dz/fivem-status/issues"
+  },
+  "homepage": "https://github.com/mrfix-dz/fivem-status#readme",
+  "dependencies": {
+    "axios": "^1.9.0"
+  }
+}
