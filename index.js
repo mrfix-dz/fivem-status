@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 class Server {
-    constructor({ ip, port }) {
+    constructor({ ip, port, timeout = 5000 }) {
         if (!ip) {
             throw new Error("Please provide an IP.");
         }
@@ -9,232 +9,145 @@ class Server {
             throw new Error("Please provide a port.");
         }
         this.baseUrl = `http://${ip}:${port}`;
+        this.timeout = timeout;
+    }
+
+    async fetchData(url) {
+        try {
+            const response = await axios.get(url, { timeout: this.timeout });
+            if (!response.data || typeof response.data !== 'object') {
+                throw new Error('Invalid response data');
+            }
+            return response.data;
+        } catch (error) {
+            console.error(`Error fetching data from ${url}:`, error);
+            throw new Error(`Unable to fetch data from ${url}`);
+        }
     }
 
     async getNumberPlayers() {
-        try {
-            const url = `${this.baseUrl}/players.json`;
-            const response = await axios.get(url);
-            return response.data.length;
-        } catch (error) {
-            console.error("Error fetching number of players:", error);
-            throw new Error("Unable to fetch number of players");
-        }
+        const url = `${this.baseUrl}/players.json`;
+        const data = await this.fetchData(url);
+        return data.length;
     }
 
     async getPlayers() {
-        try {
-            const url = `${this.baseUrl}/players.json`;
-            const response = await axios.get(url);
-            return response.data;
-        } catch (error) {
-            console.error("Error fetching players:", error);
-            throw new Error("Unable to fetch players");
-        }
+        const url = `${this.baseUrl}/players.json`;
+        return this.fetchData(url);
     }
 
     async getMaxPlayers() {
-        try {
-            const url = `${this.baseUrl}/info.json`;
-            const response = await axios.get(url);
-            return response.data.vars.sv_maxClients;
-        } catch (error) {
-            console.error("Error fetching max players:", error);
-            throw new Error("Unable to fetch max players");
-        }
+        const url = `${this.baseUrl}/info.json`;
+        const data = await this.fetchData(url);
+        return data.vars.sv_maxClients;
     }
 
     async getResources() {
-        try {
-            const url = `${this.baseUrl}/info.json`;
-            const response = await axios.get(url);
-            return response.data.resources;
-        } catch (error) {
-            console.error("Error fetching resources:", error);
-            throw new Error("Unable to fetch resources");
-        }
+        const url = `${this.baseUrl}/info.json`;
+        const data = await this.fetchData(url);
+        return data.resources;
     }
 
     async getDeveloper() {
-        try {
-            const url = `${this.baseUrl}/info.json`;
-            const response = await axios.get(url);
-            return response.data.vars.Developer;
-        } catch (error) {
-            console.error("Error fetching developer info:", error);
-            throw new Error("Unable to fetch developer info");
-        }
+        const url = `${this.baseUrl}/info.json`;
+        const data = await this.fetchData(url);
+        return data.vars.Developer;
     }
 
     async getDiscord() {
-        try {
-            const url = `${this.baseUrl}/info.json`;
-            const response = await axios.get(url);
-            return response.data.vars.Discord;
-        } catch (error) {
-            console.error("Error fetching Discord info:", error);
-            throw new Error("Unable to fetch Discord info");
-        }
+        const url = `${this.baseUrl}/info.json`;
+        const data = await this.fetchData(url);
+        return data.vars.Discord;
     }
 
     async getOwners() {
-        try {
-            const url = `${this.baseUrl}/info.json`;
-            const response = await axios.get(url);
-            return response.data.vars.Owners;
-        } catch (error) {
-            console.error("Error fetching owners:", error);
-            throw new Error("Unable to fetch owners");
-        }
+        const url = `${this.baseUrl}/info.json`;
+        const data = await this.fetchData(url);
+        return data.vars.Owners;
     }
 
     async getActivitypubFeed() {
-        try {
-            const url = `${this.baseUrl}/info.json`;
-            const response = await axios.get(url);
-            return response.data.vars.activitypubFeed;
-        } catch (error) {
-            console.error("Error fetching activitypub feed:", error);
-            throw new Error("Unable to fetch activitypub feed");
-        }
+        const url = `${this.baseUrl}/info.json`;
+        const data = await this.fetchData(url);
+        return data.vars.activitypubFeed;
     }
 
     async getConnectingBanner() {
-        try {
-            const url = `${this.baseUrl}/info.json`;
-            const response = await axios.get(url);
-            return response.data.vars.banner_connecting;
-        } catch (error) {
-            console.error("Error fetching connecting banner:", error);
-            throw new Error("Unable to fetch connecting banner");
-        }
+        const url = `${this.baseUrl}/info.json`;
+        const data = await this.fetchData(url);
+        return data.vars.banner_connecting;
     }
 
     async getDetailBanner() {
-        try {
-            const url = `${this.baseUrl}/info.json`;
-            const response = await axios.get(url);
-            return response.data.vars.banner_detail;
-        } catch (error) {
-            console.error("Error fetching detail banner:", error);
-            throw new Error("Unable to fetch detail banner");
-        }
+        const url = `${this.baseUrl}/info.json`;
+        const data = await this.fetchData(url);
+        return data.vars.banner_detail;
     }
 
     async getGameName() {
-        try {
-            const url = `${this.baseUrl}/info.json`;
-            const response = await axios.get(url);
-            return response.data.vars.gamename;
-        } catch (error) {
-            console.error("Error fetching game name:", error);
-            throw new Error("Unable to fetch game name");
-        }
+        const url = `${this.baseUrl}/info.json`;
+        const data = await this.fetchData(url);
+        return data.vars.gamename;
     }
 
     async getLocale() {
-        try {
-            const url = `${this.baseUrl}/info.json`;
-            const response = await axios.get(url);
-            return response.data.vars.locale;
-        } catch (error) {
-            console.error("Error fetching locale:", error);
-            throw new Error("Unable to fetch locale");
-        }
+        const url = `${this.baseUrl}/info.json`;
+        const data = await this.fetchData(url);
+        return data.vars.locale;
     }
 
     async getOnesync() {
-        try {
-            const url = `${this.baseUrl}/info.json`;
-            const response = await axios.get(url);
-            return response.data.vars.onesync_enabled;
-        } catch (error) {
-            console.error("Error fetching onesync status:", error);
-            throw new Error("Unable to fetch onesync status");
-        }
+        const url = `${this.baseUrl}/info.json`;
+        const data = await this.fetchData(url);
+        return data.vars.onesync_enabled;
     }
 
     async getLicenseKeyToken() {
-        try {
-            const url = `${this.baseUrl}/info.json`;
-            const response = await axios.get(url);
-            return response.data.vars.sv_licenseKeyToken;
-        } catch (error) {
-            console.error("Error fetching license key token:", error);
-            throw new Error("Unable to fetch license key token");
-        }
+        const url = `${this.baseUrl}/info.json`;
+        const data = await this.fetchData(url);
+        return data.vars.sv_licenseKeyToken;
     }
 
     async getProjectDesc() {
-        try {
-            const url = `${this.baseUrl}/info.json`;
-            const response = await axios.get(url);
-            return response.data.vars.sv_projectDesc;
-        } catch (error) {
-            console.error("Error fetching project description:", error);
-            throw new Error("Unable to fetch project description");
-        }
+        const url = `${this.baseUrl}/info.json`;
+        const data = await this.fetchData(url);
+        return data.vars.sv_projectDesc;
     }
 
     async getProjectName() {
-        try {
-            const url = `${this.baseUrl}/info.json`;
-            const response = await axios.get(url);
-            return response.data.vars.sv_projectName;
-        } catch (error) {
-            console.error("Error fetching project name:", error);
-            throw new Error("Unable to fetch project name");
-        }
+        const url = `${this.baseUrl}/info.json`;
+        const data = await this.fetchData(url);
+        return data.vars.sv_projectName;
     }
 
     async getscriptHook() {
-        try {
-            const url = `${this.baseUrl}/info.json`;
-            const response = await axios.get(url);
-            return response.data.vars.sv_scriptHookAllowed;
-        } catch (error) {
-            console.error("Error fetching script hook status:", error);
-            throw new Error("Unable to fetch script hook status");
-        }
+        const url = `${this.baseUrl}/info.json`;
+        const data = await this.fetchData(url);
+        return data.vars.sv_scriptHookAllowed;
     }
 
     async getTags() {
-        try {
-            const url = `${this.baseUrl}/info.json`;
-            const response = await axios.get(url);
-            return response.data.vars.tags;
-        } catch (error) {
-            console.error("Error fetching tags:", error);
-            throw new Error("Unable to fetch tags");
-        }
+        const url = `${this.baseUrl}/info.json`;
+        const data = await this.fetchData(url);
+        return data.vars.tags;
     }
 
     async getTxAdminVersion() {
-        try {
-            const url = `${this.baseUrl}/info.json`;
-            const response = await axios.get(url);
-            return response.data.vars.txAdmin-version;
-        } catch (error) {
-            console.error("Error fetching txAdmin version:", error);
-            throw new Error("Unable to fetch txAdmin version");
-        }
+        const url = `${this.baseUrl}/info.json`;
+        const data = await this.fetchData(url);
+        return data.vars.txAdmin - version;
     }
 
     async getVersion() {
-        try {
-            const url = `${this.baseUrl}/info.json`;
-            const response = await axios.get(url);
-            return response.data.version;
-        } catch (error) {
-            console.error("Error fetching version:", error);
-            throw new Error("Unable to fetch version");
-        }
+        const url = `${this.baseUrl}/info.json`;
+        const data = await this.fetchData(url);
+        return data.version;
     }
 
     async getServerStatus() {
+        const url = `${this.baseUrl}/info.json`;
         try {
-            const url = `${this.baseUrl}/info.json`;
-            await axios.get(url);
+            await axios.get(url, { timeout: this.timeout });
             return 'online';
         } catch (error) {
             return 'offline';

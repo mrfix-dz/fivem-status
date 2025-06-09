@@ -1,7 +1,10 @@
 
 # Server Information API
 
-**Author:** MR-FIX (Discord: dev.mrfix | GitHub: mrfix-dz | NpmJs: mrfix.dz)
+**Author**: MR-FIX  
+**Discord**: [dev.mrfix](https://discord.com/users/dev.mrfix)  
+**GitHub**: [mrfix-dz](https://github.com/mrfix-dz)  
+**NpmJs**: [mrfix.dz](https://www.npmjs.com/package/mrfix.dz)
 
 This package allows you to interact with a server to retrieve various pieces of information such as the number of players, server status, resources, and other details from the server API.
 

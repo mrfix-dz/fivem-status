@@ -1,6 +1,6 @@
 {
   "name": "@mrfix.dz/fivem-status",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "fivem-status is a package to monitor the status of a FiveM server, displaying details like online/offline status, player count, and server information.",
   "main": "index.js",
   "scripts": {
